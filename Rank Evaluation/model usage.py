@@ -69,5 +69,4 @@ with open('results/sea_ice_sorted.csv', 'w', encoding = 'utf-8-sig') as outcsv:
     writer.writerow(['term_score', 'releaseDate_score', 'versionNum_score', 'processingL_score', 'allPop_score','monthPop_score', 'userPop_score', 'spatialR_score','temporalR_score','click_score','label'])
     for i in sorted_rows:
         writer.writerow(i)
-        
-#np.savetxt("results/ocean_pressure_sorted.csv", sorted_rows, delimiter=",", fmt='%s')
+  
