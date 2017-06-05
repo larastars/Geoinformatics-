@@ -13,13 +13,12 @@ import math
 import csv 
 
 
-#load model 
-# load json and create model
+#load RankSVM model  
 json_file = open('model.json', 'r')
 loaded_model_json = json_file.read()
 json_file.close()
 loaded_model = model_from_json(loaded_model_json)
-# load weights into new model
+# load weights into the model
 loaded_model.load_weights("model.h5")
 print("Loaded model from disk")
 
@@ -28,8 +27,7 @@ print("Model compiled")
 
 dataframe = pd.read_csv("labelled_queries/sea_ice.csv")
 features = dataframe.ix[:,0:10]
-
-#scale relatively to standarize to have mean of 0 and std dev of 1  
+ 
 features = scaler.transform(features)
 
 pair_list = []
