@@ -3,3 +3,5 @@
 2- sort queries ranks the queries based on a specified feature 
 
 3- Rank evaluation evaluates the performance of a given query and gives the precision and NDCG
+
+4- total evaluation uses the model and evalutes all queries and put them in a csv file 
