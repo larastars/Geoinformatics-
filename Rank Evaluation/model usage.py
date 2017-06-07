@@ -5,12 +5,6 @@ Created on Tue May 30 13:13:44 2017
 @author: larakamal
 """
 
-# -*- coding: utf-8 -*-
-"""
-Created on Tue May 30 13:13:44 2017
-
-@author: larakamal
-"""
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.models import model_from_json
