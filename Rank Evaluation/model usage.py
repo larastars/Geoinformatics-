@@ -34,7 +34,6 @@ features = scaler.transform(features)
 rank = []  
 for i in range(len(features)):
     rank.append(0)
-    print(i)
 
 index = 0   
 var = 0
