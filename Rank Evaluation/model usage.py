@@ -62,7 +62,7 @@ for i in range(len(rank_doc_list)):
     sorted_rows.append(rows.values[rank_doc_list[i]])
     
 #save file 
-with open('gravity_new.csv', 'w', encoding = 'utf-8-sig') as outcsv:
+with open('gravity_sorted.csv', 'w', encoding = 'utf-8-sig') as outcsv:
     writer = csv.writer(outcsv)
     writer.writerow(['term_score', 'releaseDate_score', 'versionNum_score', 'processingL_score', 'allPop_score','monthPop_score', 'userPop_score', 'spatialR_score','temporalR_score','click_score','label'])
     for i in sorted_rows:
