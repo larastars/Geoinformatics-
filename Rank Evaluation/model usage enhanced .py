@@ -19,20 +19,22 @@ loaded_model_json = json_file.read()
 json_file.close()
 loaded_model = model_from_json(loaded_model_json)
 loaded_model.load_weights("model.h5")
-#print("Loaded model from disk")
 
+#compile model 
 model.compile(optimizer='rmsprop',loss='binary_crossentropy', metrics=['accuracy'])
-#print("Model compiled")              
 
+#extract 10 features from documents 
 dataframe = pd.read_csv("labelled_queries/quikscat.csv")
 features = dataframe.ix[:,0:10]
 features = scaler.transform(features)
 
+#initialize rank from 0 to length of features
 rank = []
 for i in range(len(features)):
     rank.append(i)
     
-    
+#insertion sort to sort features and rank list
+#insertion sort assumes transitivity 
 for i in range(1, len(features)):
         j = i-1
         temp = features[i]
@@ -45,12 +47,13 @@ for i in range(1, len(features)):
             rank[j+1] = temp2
             
             
+#re-arrange documents accordingly
 rows = dataframe.ix[:,0:11]
 sorted_rows =[]
 for i in rank:
     sorted_rows.append(rows.values[i])
 
-
+#save file 
 with open('results/enhanced/quikscat_sorted.csv', 'w', encoding = 'utf-8-sig') as outcsv:
     writer = csv.writer(outcsv)
     writer.writerow(['term_score', 'releaseDate_score', 'versionNum_score', 'processingL_score', 'allPop_score','monthPop_score', 'userPop_score', 'spatialR_score','temporalR_score','click_score','label'])
