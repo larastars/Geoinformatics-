@@ -22,19 +22,23 @@ loaded_model = model_from_json(loaded_model_json)
 loaded_model.load_weights("model.h5")
 print("Loaded model from disk")
 
+#compile model 
 model.compile(optimizer='rmsprop',loss='binary_crossentropy', metrics=['accuracy'])
 print("Model compiled")              
 
+#extract 10 features 
 dataframe = pd.read_csv("labelled_queries/gravity.csv")
 features = dataframe.ix[:,0:10]
 features = scaler.transform(features)
 
 
-
+#initialize rank list with zeros 
 rank = []  
 for i in range(len(features)):
     rank.append(0)
 
+#compare every document with every other document and add class_prediction (0 0r 1)
+#to the corresponding spot in the list
 index = 0   
 var = 0
 for i in range(len(features)):
@@ -48,15 +52,16 @@ for i in range(len(features)):
             var += 1
             
     
-#sort list
+#sort list by index 
 rank_doc_list = [b[0] for b in sorted(enumerate(rank), key=lambda i:i[1], reverse = True)]
 rows = dataframe.ix[:,0:11]
 
+#sort documents accordingly 
 sorted_rows =[]
 for i in range(len(rank_doc_list)):
     sorted_rows.append(rows.values[rank_doc_list[i]])
     
-
+#save file 
 with open('gravity_new.csv', 'w', encoding = 'utf-8-sig') as outcsv:
     writer = csv.writer(outcsv)
     writer.writerow(['term_score', 'releaseDate_score', 'versionNum_score', 'processingL_score', 'allPop_score','monthPop_score', 'userPop_score', 'spatialR_score','temporalR_score','click_score','label'])
